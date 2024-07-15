@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Index</title>
+</head>
+<body>
+    {% if messages %}
+        <ul class="messages">
+            {% for message in messages %}
+                <li{% if messages.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
+            {% endfor %}
+        </ul>
+    {% endif %}
+
+    <!-- Greeting the logged-in user by username -->
+    <p>Hi, {{ user.username }}!</p>
+    
+    <!-- Displaying the product data -->
+    {% if product_data %}
+        <table>
+            <tr>
+                <th>Name</th>
+                <th>Price</th>
+            </tr>
+            {% for product_record in product_data %}
+                <tr>
+                    <td><a href="/product/{{ product_record.id }}/">{{ product_record.name }}</a></td>
+                    <td>{{ product_record.price }}</td>
+                </tr>
+            {% endfor %}
+        </table>
+    {% endif %}
+
+    <a href="/checkout">Go to check out</a>
+    
+    <a href="{% url 'transaction_history' %}">Transaction History</a>
+</body>
+</html>
+
